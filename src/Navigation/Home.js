@@ -13,7 +13,7 @@ const HomeNavigation = () => {
 
 
     return (
-        <NavigationContainer>
+        <>
             <Stack.Navigator screenOptions={{
                 headerShown: false
             }}
@@ -22,7 +22,7 @@ const HomeNavigation = () => {
                 <Stack.Screen name="DestinationSearch" component={DestinationSearch} />
                 <Stack.Screen name="SearchResultScreen" component={SearchResultScreen} />
             </Stack.Navigator>
-        </NavigationContainer>
+        </>
     );
 }
 

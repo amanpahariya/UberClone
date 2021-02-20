@@ -11,6 +11,7 @@ import { SafeAreaView, StatusBar, PermissionsAndroid, Platform } from 'react-nat
 
 import Geolocation from 'react-native-geolocation-service';
 import HomeNavigation from './src/Navigation/Home';
+import RootNavigatior from './src/Navigation/root';
 
 navigator.geolocation = require('react-native-geolocation-service');
 
@@ -52,7 +53,7 @@ const App = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <HomeNavigation />
+      <RootNavigatior />
     </>
   );
 };
