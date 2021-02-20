@@ -13,7 +13,10 @@
     },
     "categories": {
       "function": {
-        "uberclonea823ffa2a823ffa2PostConfirmation": {}
+        "uberclonea823ffa2a823ffa2PostConfirmation": {
+          "deploymentBucketName": "amplify-uberclone-dev-155657-deployment",
+          "s3Key": "amplify-builds/uberclonea823ffa2a823ffa2PostConfirmation-6f74515869396c734c49-build.zip"
+        }
       },
       "auth": {
         "uberclonea823ffa2a823ffa2": {}
