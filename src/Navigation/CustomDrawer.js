@@ -1,12 +1,36 @@
-import React from 'react';
+import React, { useEffect,useState } from 'react';
 import { Text, View, Pressable } from 'react-native';
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer'
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { Auth } from 'aws-amplify';
+import { getUser } from '../../graphql/queries'
+
+import { API, Auth, graphqlOperation } from 'aws-amplify';
 
 
 function CustomDrawer(props) {
+
+    const [username, setusername] = useState('');
+    useEffect(() => {
+        const fetchuser = async () => {
+            try {
+                const userInfo = await Auth.currentAuthenticatedUser();
+                const response = await API.graphql(
+                    graphqlOperation(
+                        getUser, {
+                        id: userInfo.attributes.sub,
+                    }
+                    )
+                )
+                setusername(response.data.getUser.username)
+            } catch (e) {
+                console.log(e);
+            }
+        }
+        fetchuser();
+    }, []);
+
+
     return (
         <SafeAreaProvider {...props} >
             <View style={{ backgroundColor: 'black', padding: 15 }}>
@@ -25,7 +49,7 @@ function CustomDrawer(props) {
                         marginRight: 10
                     }} />
                     <View>
-                        <Text style={{ color: '#fff', fontSize: 24 }}>Aman Gupta</Text>
+                        <Text style={{ color: '#fff', fontSize: 24 }}>{username}</Text>
                         <Text style={{ color: '#fff' }}>5.00 *</Text>
                     </View>
                 </View>
