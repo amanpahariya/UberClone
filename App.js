@@ -7,13 +7,16 @@
  */
 
 import React, { useEffect } from 'react';
-import { SafeAreaView, StatusBar, PermissionsAndroid, Platform } from 'react-native';
+import { StatusBar, PermissionsAndroid, Platform } from 'react-native';
 
 import Geolocation from 'react-native-geolocation-service';
-import HomeNavigation from './src/Navigation/Home';
-import RootNavigatior from './src/Navigation/root';
 
+import RootNavigatior from './src/Navigation/root';
+import { withAuthenticator } from 'aws-amplify-react-native';
 navigator.geolocation = require('react-native-geolocation-service');
+import Amplify from "aws-amplify";
+import awsExports from "./aws-exports";
+Amplify.configure(awsExports);
 
 const App = () => {
 
@@ -58,5 +61,4 @@ const App = () => {
   );
 };
 
-
-export default App;
+export default withAuthenticator(App)
