@@ -37,6 +37,7 @@ const RootNavigatior = () => {
                 <Drawer.Screen name="Settings">
                     {() => <DummyScreen name={"Settings"} />}
                 </Drawer.Screen>
+
             </Drawer.Navigator>
         </NavigationContainer >
     );

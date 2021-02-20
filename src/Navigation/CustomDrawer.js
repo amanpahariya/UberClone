@@ -1,7 +1,9 @@
 import React from 'react';
-import { Text, View, Pressable, StatusBar } from 'react-native';
-import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer'
+import { Text, View, Pressable } from 'react-native';
+import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer'
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+import { Auth } from 'aws-amplify';
 
 
 function CustomDrawer(props) {
@@ -57,7 +59,11 @@ function CustomDrawer(props) {
                 </Pressable>
             </View>
 
-            <DrawerItemList {...props} />
+            <DrawerContentScrollView>
+                <DrawerItemList {...props} />
+                <DrawerItem label="Logout" onPress={() => { Auth.signOut() }} />
+            </DrawerContentScrollView>
+
         </SafeAreaProvider>
     );
 }
