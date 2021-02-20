@@ -9,10 +9,8 @@
 import React, { useEffect } from 'react';
 import { SafeAreaView, StatusBar, PermissionsAndroid, Platform } from 'react-native';
 
-import HomeScreen from './src/Screens/HomeScreen';
 import Geolocation from 'react-native-geolocation-service';
-
-import DestinationScreen from './src/Screens/DestinationScreen';
+import HomeNavigation from './src/Navigation/Home';
 
 navigator.geolocation = require('react-native-geolocation-service');
 
@@ -54,9 +52,7 @@ const App = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <DestinationScreen />
-      </SafeAreaView>
+      <HomeNavigation />
     </>
   );
 };

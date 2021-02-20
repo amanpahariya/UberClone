@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
@@ -20,60 +21,66 @@ const DestinationScreen = () => {
     const [originPlace, setOriginPlace] = useState(null);
     const [destinationPlace, setDestinationPlace] = useState(null);
 
+    const navigation = useNavigation();
+
     useEffect(() => {
-        if(originPlace && destinationPlace){
-            return (
-                console.warn('aman')
+        if (originPlace && destinationPlace) {
+            navigation.navigate("SearchResultScreen",
+                {
+                    originPlace: originPlace,
+                    destinationPlace: destinationPlace
+                }
             )
         }
-}, [originPlace, destinationPlace]);
-return (
-    <SafeAreaView>
-        <View style={styles.mainContainer}>
-            <View style={styles.container}>
-                <GooglePlacesAutocomplete
-                    placeholder='From'
-                    onPress={(data, details = null) => {
-                        setOriginPlace({ data, details });
-                    }}
-                    currentLocation={true}
-                    currentLocationLabel='Current location'
-                    enablePoweredByContainer={false}
-                    suppressDefaultStyles
-                    styles={{
-                        textInput: styles.textInput,
-                        listView: styles.listView,
-                        separator: styles.separator,
-                    }}
-                    query={{
-                        key: `${config.GOOGLE_API_KEY}`,
-                        language: 'en',
-                    }}
-                    renderRow={(data) => <PlaceRow data={data} />}
-                />
-                <GooglePlacesAutocomplete
-                    placeholder='Where to?'
-                    onPress={(data, details = null) => {
-                        setDestinationPlace({ data, details });
-                    }}
-                    currentLocation={true}
-                    enablePoweredByContainer={false}
-                    suppressDefaultStyles
-                    styles={{
-                        textInput: styles.textInput,
-                        separator: styles.separator,
-                    }}
-                    query={{
-                        key: `${config.GOOGLE_API_KEY}`,
-                        language: 'en',
-                    }}
-                    renderRow={(data) => <PlaceRow data={data} />}
-                    renderDescription={(data) => data.description || data.vicinity}
-                />
+    }, [originPlace, destinationPlace]);
+    return (
+        <SafeAreaView>
+            <View style={styles.mainContainer}>
+                <View style={styles.container}>
+                    <GooglePlacesAutocomplete
+                        placeholder='From'
+                        onPress={(data, details = null) => {
+                            setOriginPlace({ data, details });
+                        }}
+                        currentLocation={true}
+                        currentLocationLabel='Current location'
+                        enablePoweredByContainer={false}
+                        suppressDefaultStyles
+                        styles={{
+                            textInput: styles.textInput,
+                            listView: styles.listView,
+                            separator: styles.separator,
+                        }}
+                        fetchDetails
+                        query={{
+                            key: 'AIzaSyBuon8_JiqsQM1sPFklSclwBUHF7qyAjbo',
+                            language: 'en',
+                        }}
+                        renderRow={(data) => <PlaceRow data={data} />}
+                    />
+                    <GooglePlacesAutocomplete
+                        placeholder='From'
+                        onPress={(data, details = null) => {
+                            setDestinationPlace({ data, details });
+                        }}
+                        enablePoweredByContainer={false}
+                        suppressDefaultStyles
+                        styles={{
+                            textInput: styles.textInput,
+                            listView: styles.listView,
+                            separator: styles.separator,
+                        }}
+                        fetchDetails
+                        query={{
+                            key: 'AIzaSyBuon8_JiqsQM1sPFklSclwBUHF7qyAjbo',
+                            language: 'en',
+                        }}
+                        renderRow={(data) => <PlaceRow data={data} />}
+                    />
+                </View>
             </View>
-        </View>
-    </SafeAreaView>
-);
+        </SafeAreaView>
+    );
 }
 
 export default DestinationScreen;
