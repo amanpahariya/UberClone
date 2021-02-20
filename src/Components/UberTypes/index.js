@@ -4,20 +4,25 @@ import UberTypesRow from '../UberTypesRow';
 import typeData from "../../assets/data/types";
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 
-const UberTypes = () => {
-    const confirm = () => {
-        console.warn('confirm')
-    }
+const UberTypes = ({ typeState, onSubmit }) => {
+
+    const [selectedType, setSelectedType] = typeState;
+
     return (
         <View>
             <View>
                 <ScrollView style={{ marginBottom: 50 }}>
                     {typeData.map(type =>
-                        <UberTypesRow type={type} key={type.id} />)
+                        <UberTypesRow
+                            type={type}
+                            key={type.id}
+                            isSelected={type.type === selectedType}
+                            onPress={() => setSelectedType(type.type)}
+                        />)
                     }
                 </ScrollView>
             </View>
-            <Pressable onPress={confirm}
+            <Pressable onPress={onSubmit}
                 style={{
                     backgroundColor: 'black',
                     padding: 10,

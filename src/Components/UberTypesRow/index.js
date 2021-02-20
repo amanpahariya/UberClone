@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Pressable } from 'react-native';
 import styles from './style';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const UberTypesRow = (props) => {
-    const { type } = props;
+    const { type, onPress, isSelected } = props;
 
 
     const getImage = () => {
@@ -17,7 +17,9 @@ const UberTypesRow = (props) => {
         return require('../../assets/images/UberXL.jpeg')
     }
     return (
-        <View style={styles.container}>
+        <Pressable
+            onPress={onPress}
+            style={[styles.container, { backgroundColor: isSelected ? '#efefef' : 'white' }]}>
             <Image style={styles.image} source={getImage()} />
             <View style={styles.middlecontainer}>
                 <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
@@ -34,7 +36,7 @@ const UberTypesRow = (props) => {
             <View style={styles.rightcontainer}>
                 <Text style={styles.price}>est. $ {type.price}</Text>
             </View>
-        </View>
+        </Pressable>
 
     );
 }
